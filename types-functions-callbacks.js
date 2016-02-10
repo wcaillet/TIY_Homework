@@ -24,6 +24,13 @@ var doubleNum = function(num) {
 	var newNum = num * 2
 	return newNum
 }
+
+// Another way of writing this function: 
+// var doubleNum = function(num){
+//	var newNum =num * 2
+//	return newNum
+// }
+
 //console.log (doubleNum(5))
 console.assert(doubleNum(5) === 10)
 
@@ -43,6 +50,7 @@ var sum = function(num1, num2){
 console.assert(sum(8, 11) === 19);
 console.assert(sum(4, 100) === 104);
 
+
 // PART 2
 
 // Write a function called average that takes two numbers
@@ -51,6 +59,7 @@ console.assert(sum(4, 100) === 104);
 // of your average function.
 
 var average = function(num1, num2){
+//	var theSum = sum(num1, num2) - Can add this, but not absolutely necessary
 	return (sum(num1, num2)/2)
 }
 //console.log(average(8,12))
@@ -86,6 +95,8 @@ console.assert(sum(true, 5) === null);
 // whether a number is negative or not. 
 
 var isNegative = function(num1){
+//	return number < 0 (A very concise way of writing this -
+// 	its a boolean statement that will return a boolean value)	
 	if (num1 < 0){
 		return true
 	}
@@ -105,9 +116,18 @@ console.assert(isNegative(-999) === true)
 // To avoid repeating yourself, use your isNegative 
 // function inside your sum function ***
 var sum = function(num1, num2){
+//	if (typeof num1 !== 'number' || typeof num2 !== 'number'){
+//	return null
+//	}	- T
 	if (isNegative(num1)===true || isNegative(num2)=== true){
 		return null
 	}
+	if (isNegative(num1) || isNegative(num2)) {
+		return null
+	} //Here (isNegative(num1)) and same for num2 is referring to the section
+	// above and whether or not the value evaluated to true or false. So,
+	// if at least one of these numbers is true (b/c negative), then whole
+	// stmt becomes true and will run the else statement. 
 	else{
 		return (num1 + num2)
 	}
@@ -119,10 +139,11 @@ console.assert(sum(5,-5) === null)
 // Part 5
 // Make the following assertions pass. 
 
-var X = 10
 var increment = function(){
-	X = X + 1
+	X = X + 1 //no need for return here, because modifying smthg outside the f(x)
 }
+var X = 10
+
 //console.log(X)
 console.assert(X === 10)
 increment()
@@ -142,8 +163,8 @@ console.assert(X === 11)
 // pass.
 
 var x = 10
-var increment = function(){
-	return  x+1
+var increment = function(number){
+	return  number +1 //can't put x +1 b/c you would only be changing x!
 }
 
 console.assert(x === 10)
@@ -215,6 +236,17 @@ console.assert(justOneString(8,null) === false)
 // modify global variables, although that's not a good
 // pattern for production code.
 
+// var doTwice = function(someFunction) {
+// 	var value = someFunction()
+// 	var value = someFunction(value)
+// 	return value
+// }
+
+var doTwice = function(someFunction) {
+	someFunction()
+	someFunction()
+}
+
 var NUMBER = 10
 
 var incrementGlobalNumber = function(){
@@ -223,12 +255,6 @@ var incrementGlobalNumber = function(){
 
 var doubleGlobalNumber = function() {
 	NUMBER = NUMBER * 2
-}
-
-var doTwice = function(someFunction) {
-	var value = someFunction()
-	var value = someFunction(value)
-	return value
 }
 
 doTwice(incrementGlobalNumber)
@@ -250,9 +276,10 @@ var conditionallyInvoke = function(someFunction){
 	if (ORACLE === 'YES'){
 		return someFunction()
 	}
-	else {
-		return ' '
-	}
+	// else {
+	// 	return ' '
+	// }  ---> not entirely necessary to have this here, b/c would still rtn
+	//		 nothing without it
 }
 
 //console.log(conditionallyInvoke(doubleGlobalNumber))
@@ -268,11 +295,17 @@ console.assert(NUMBER === 96)
 
 // Make the following assertion work:
 
-var factory = function(){
-	
-}/// I'm lost here to part 12
+var output = function() {
+ 	return "hello world"   
+}
+var factory = function() {
+	return output
+}
 
-console.log(factory()())
+// console.log(factory()()) 
+//A function is calling a function
+// Here the second set of () is calling the output of the function,
+// here its function output of factory()
 console.assert(factory()() === 'hello world')  // INCEPTION!
 
 
@@ -280,13 +313,43 @@ console.assert(factory()() === 'hello world')  // INCEPTION!
 
 // Want more? 
 
+var output = function(input){
+	return input
+}    
+var factory2 = function() {
+    return output1
+}
+
+//console.log(factory2()('you sly dog'))
+//console.log(factory2()(999))
+
 console.assert(factory2()('you sly dog') === 'you sly dog')
 console.assert(factory2()(999) === 999)
+
 
 // Part 12
 
 // This can't be healthy...
 
+var output = function() {
+ 	return answer 
+}
+var factory3 = function(input) {
+	answer = input
+	return output
+}
+var answer = factory3()
+
+//console.log(factory3(100)())
 console.assert(factory3('i have reached function nirvana')() === 'i have reached function nirvana')
 console.assert(factory3(100)() === 100)
+
+
+
+
+
+
+
+
+
 
