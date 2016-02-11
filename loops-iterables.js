@@ -139,8 +139,39 @@ console.assert(fizzbuzz(10) === "..fizz.buzzfizz..fizzbuzz")
  * i.e. findLongestWord("a book full of dogs") should return "book"
  */
 
+var alphabet = "qwertyuiopasdfghjklzxcvbnm1234567890 "
+
+var contains = function(sequence, element) {
+   if (sequence.indexOf(element) === -1) {
+       return false
+   }
+   return true
+}
+
+var stripPunct = function(inputString) {
+    var newString = ""    
+   for (var i = 0; i < inputString.length; i++) {
+       var char = inputString[i]
+           var caseInsensitiveChar = char.toLowerCase()
+       if (contains(alphabet,caseInsensitiveChar)) { 
+           newString = newString + char
+       }
+}
+   return newString
+}
+
 function findLongestWord(sentence){
-    // YOUR CODE HERE
+   var arr = sentence.split(" ")
+   var longestWord = ""
+   for (var i = 0; i < arr.length; i++) {
+       var word = arr[i]
+       var cleanWord = stripPunct(word)
+       if (longestWord.length < cleanWord.length) {
+           longestWord = cleanWord
+       }
+   }
+   return longestWord
+}
 }
 
 console.assert(findLongestWord("a book full of dogs") === "book")
