@@ -4,15 +4,27 @@
  * Write a function that calculates the sum of all the numbers in an array
  */
 
-var sumOfArray = function(arr) {
-	var total = 0
-	var count = 0
-	while(index < arr.length){
-		var element = arr(index)
-		total = total + element
-		index = index + 1
-	}
-	return total
+// var sumOfArray = function(arr) {
+// 	var total = 0
+// 	var index = 0
+// 	while(index < arr.length) {
+// 		var element = arr[index]
+// 		total = total + element
+// 		index = index + 1
+// 	}
+// 	return total
+// }
+
+// var sampleArray = []
+// var result = sumOfArray(sampleArray)
+// console.log(result)
+
+var sumOfArray = function (arr){
+    var total = 0
+    for (var i=0; i < arr.length; i++){
+    	total= total + arr[i]   
+    }
+    return total   
 }
 
 console.assert(sumOfArray([1, 2]) === 3);
@@ -25,10 +37,19 @@ console.assert(sumOfArray([10, 9, 8]) === 27);
 // Write a function maxOfArray() that takes an array of
 // numbers as an argument and finds the highest number.
 
+var maxOfArray = function(arr) {
+	var max = arr[0] //1. define the max
+	for (var i = 0; i < arr.length; i++) {
+		if (typeof arr[i] != "number"){return NaN}
+        if (max < arr[i]) {
+			max = arr[i]
+		} //2. For each item in arr, update max if item [i] is greater than max
+	} return max //3. return max
+}
 
 console.assert(maxOfArray([2,4,3]) === 4)
 console.assert(maxOfArray([10,9,8,100,7,6]) === 100)
-console.assert(isNan(maxOfArray([1,2,'bucklemyshoe']))
+console.assert(isNaN(maxOfArray([1,2,'bucklemyshoe'])))
 
 /**
  * PART 2
@@ -38,7 +59,13 @@ console.assert(isNan(maxOfArray([1,2,'bucklemyshoe']))
  */
 
 function isVowel(symbol){
-    // YOUR CODE HERE
+	var vowelsArray = ['A','a','E','e','I','i','O','o','U','u']
+    for (var i=0; i< vowelsArray.length; i++) {
+     	if(symbol === vowelsArray[i]){
+            return true
+ 		}  
+    }	
+    return false
 }
 
 console.assert(isVowel(0) === false);
@@ -56,6 +83,14 @@ console.assert(isVowel("E") === true);
  * string "books".
  */
 
+var reverse = function(oldString) {
+	var newString = ''
+    for (var i=oldString.length-1; i>=0; i--) {
+        var letter = oldString[i]
+        newString = newString + letter
+    }
+    return newString
+}
 
 console.assert(reverse("books") === "skoob")
 console.assert(reverse("we don't want no trouble") === "elbuort on tnaw t'nod ew")
@@ -71,7 +106,24 @@ console.assert(reverse("we don't want no trouble") === "elbuort on tnaw t'nod ew
  * - for every number that is a multiple of 3 and 5, return "fizzbuzz"
  */
 
-
+var fizzbuzz = function(input) {
+	var result = ""
+    for (var i=1 ; i <=input; i++){
+    	if(i%3 !==0 && i%5 !== 0){
+        	result = result + "."
+        } 
+        if(i%3 ===0 && i%5 !==0){
+            result = result + "fizz"
+        }
+        if(i%3 !==0 && i%5 ===0){
+            result = result + "buzz"
+        }
+        if(i%3===0 && i%5 ===0){
+            result = result + "fizzbuzz"
+        }
+    } //log(result)
+    return result 
+}
 
 console.assert(fizzbuzz(1) === ".")
 console.assert(fizzbuzz(2) === "..")
@@ -102,9 +154,17 @@ console.assert(findLongestWord("don't mess with Texas") === "Texas")
  * write a function that returns the Greatest Common Denominator of two numbers
  * - if no GCD exists, return 1
  */
+var max = 1
 
+var GCD = function(num1, num2) {
+    for (var i = 1; i <= num1 || i <= num2; i++) {
+       if(num1%i === 0 && num2%i === 0)
+       max = i
+    }
+       return max
+}
 
-
+//log(GCD(5,1))
 console.assert(GCD(5,1) === 1);
 console.assert(GCD(15,3) === 3);
 console.assert(GCD(15,5) === 5);
