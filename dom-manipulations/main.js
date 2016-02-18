@@ -38,40 +38,24 @@ document.querySelector("#blow-up button").addEventListener('click',function(){
   	circleRed.style.height = 40 + "px"
   }
 })
-
+/////////////
+var inactiveShowing = true
 document.querySelector("#remove button").addEventListener('click',function(){
   // TASK #5
-  Array.prototype.contains = function(el) {
-  return this.indexOf(el) !== -1
-}
-
-var isDone = function(choreElement) {
-  console.log(choreElement.classList)
-  // is "done" in the classList?   
-  for (var i = 0; i < choreElement.classList.length; i ++) {
-    if (choreElement.classList[i] === 'done') {
-      return true
+  var userListEl = document.querySelector('#userList')
+  var listItems = userListEl.querySelectorAll('li.inactive')
+  for (var i = 0; i < listItems.length; i ++) {
+    // userListEl.removeChild(listItems[i])  
+    if (inactiveShowing) {
+        listItems[i].style.display = 'none'
+      }
+    else {
+      listItems[i].style.display = 'list-item'
     }
   }
-  return false
-}
-
-var choresContainer = document.querySelector("#box5 ul")
-
-var completedChoresUl = document.querySelector('#box5s ul')
-
-var chores = choresContainer.querySelectorAll('li')
-
-for (var i = 0; i < chores.length; i ++) {
-  var choreNode = chores[i]
-  if (isDone(choreNode)) {
-    choresContainer.removeChild(choreNode)
-    completedChoresUl.appendChild(choreNode)
-  }
-}
-
+  if (inactiveShowing) inactiveShowing = false
+  else inactiveShowing = true
 })
-
 
 document.querySelector("#reverse-squares button").addEventListener('click',function(){
   // TASK #6 - done // 
