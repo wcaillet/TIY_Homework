@@ -41,7 +41,7 @@ document.querySelector("#blow-up button").addEventListener('click',function(){
 /////////////
 var inactiveShowing = true
 document.querySelector("#remove button").addEventListener('click',function(){
-  // TASK #5
+  // TASK #5 - done
   var userListEl = document.querySelector('#userList')
   var listItems = userListEl.querySelectorAll('li.inactive')
   for (var i = 0; i < listItems.length; i ++) {
